@@ -2,13 +2,13 @@
   <div class="container">
     <div class="navbar-brand">
       <a class="navbar-item" href="/" style="font-weight: bold;font-size: 24px;color: inherit">QNotepad</a>
-      <a class="navbar-item is-hidden-desktop" href="/features">
+      <a class="navbar-item is-hidden-desktop" href="/features/">
         <span class="icon has-text-primary"><i class="fas fa-book"></i></span>
       </a>
-      <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
+      <a class="navbar-item is-hidden-desktop" href="https://github.com/tienquanutc/simple-note" target="_blank">
         <span class="icon" style="color: #333;"><i class="fab fa-lg fa-github-alt"></i></span>
       </a>
-      <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
+      <a class="navbar-item is-hidden-desktop" href="https://facebook.com/tienquanutc/" target="_blank">
         <span class="icon" style="color: #3b579d;"><i class="fab fa-lg fa-facebook"></i></span>
       </a>
       {# __BURGER__ #}
@@ -23,15 +23,15 @@
       <div class="navbar-start">
       </div>
       <div class="navbar-end is-hidden-mobile">
-        <a class="navbar-item" href="/features">
+        <a class="navbar-item" href="/features/">
           <span class="icon has-text-primary"><i class="fas fa-book"></i></span>
           <span>Features</span>
         </a>
-        <a class="navbar-item" href="https://github.com/jgthms/bulma" target="_blank">
+        <a class="navbar-item" href="https://github.com/tienquanutc/simple-note" target="_blank">
           <span class="icon" style="color: #333;"><i class="fab fa-lg fa-github-alt"></i></span>
           <span>Github</span>
         </a>
-        <a class="navbar-item" href="https://twitter.com/jgthms" target="_blank">
+        <a class="navbar-item" href="https://facebook.com/tienquanutc/" target="_blank">
           <span class="icon" style="color: #3b579d;"><i class="fab fa-lg fa-facebook"></i></span>
           <span>Facebook</span>
         </a>

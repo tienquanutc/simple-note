@@ -1,7 +1,7 @@
 {% extends 'base.peb' %}
 
 {% block head %}
-<title>QNotepad Online - Write notes online</title>
+<title>QNotepad Online - All Notes</title>
 
 <meta name="description" content="Fast, clean, simple to use and FREE online web notepad. Powerful to share with everyone about your note."/>
 <meta name="keywords" content="online notepad, online note app, online notebook, online bookmark, online private note, private text message, message online, online inbox message"/>

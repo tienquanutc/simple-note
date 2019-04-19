@@ -39,12 +39,6 @@
   {{ note.raw_html | raw }}
   </div>
   <hr>
-  <nav class="level is-mobile">
-    <div class="level-left"></div>
-    <div class="level-right">
-      <span class="has-text-weight-bold is-size-6">13 views</span>
-    </div>
-  </nav>
 </div>
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/notie/4.3.1/notie.min.css" type="text/css" rel="stylesheet">

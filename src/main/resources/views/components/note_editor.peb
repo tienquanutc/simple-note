@@ -44,8 +44,8 @@
             <button class="ql-clean"></button>
           </span>
     </div>
-    <input value="{{ note.plain_text }}" id="note-plain-text" name="plain_text" type="hidden">
-    <input value="{{ note.raw_html | raw }}" id="note-raw-html" name="raw_html" type="hidden">
+    <input value='{{ note.plain_text }}' id="note-plain-text" name="plain_text" type="hidden">
+    <input value='{{ note.raw_html | raw }}' id="note-raw-html" name="raw_html" type="hidden">
     <div id="editor-container" style="height: 350px;font-size: 14px;"></div>
   </div>
   <div class="field has-text-centered">
@@ -83,8 +83,8 @@
     {% else %}
     {# load note #}
     {# @formatter:off #}
-  $editor.root.innerHTML = "{{ note.raw_html | raw }}";
-  {% endif %}
+    $editor.root.innerHTML = '{{ note.raw_html | raw }}';
+    {% endif %}
 
 
   {# init auto save #}

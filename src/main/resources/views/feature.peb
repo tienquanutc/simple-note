@@ -1,0 +1,157 @@
+{% extends 'base.peb' %}
+
+{% block head %}
+<title>QNotepad Online - Write notes online</title>
+<meta name="description" content="Fast, clean, simple to use and FREE online web notepad. Powerful to share with everyone about your note."/>
+<meta name="keywords" content="online notepad, online note app, online notebook, online bookmark, online private note, private text message, message online, online inbox message"/>
+<link rel="canonical" href="{{ absoluteUri }}"/>
+<link rel="stylesheet" href="css/bulma.feature.css">
+{% endblock %}
+
+
+{% block content %}
+<div class="columns">
+  <div class="column is-12 has-text-centered">
+    <h1 class="title"><a class="has-text-black" href="/">QNotepad Online</a></h1>
+    <h2 class="subtitle">Free online note trusted by millions</h2>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="bd-lead" style="padding-top: 0; padding-bottom: 0">
+      <nav class="breadcrumb">
+        <ul>
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li class="is-active">
+            <a href="#">Features</a>
+          </li>
+        </ul>
+      </nav>
+      <header style="margin-bottom: 3rem">
+        <h1 class="title">Features</h1>
+        <p class="subtitle is-4">Stay updated about new features, bug fixes, and releases</p>
+        <a target="_blank" href="https://github.com/tienquanutc/simple-note" class="button">
+          <i class="fab fa-github fa-lg"></i>&nbsp;
+          <span>Follow on GitHub</span>
+        </a>
+      </header>
+      <div class="bd-content">
+        <div class="bd-links">
+          <a class="bd-link" href="#">
+            <p class="bd-link-surtitle">19 April 2019</p>
+            <h2 class="bd-link-name">
+              <figure class="bd-link-figure">
+                  <span class="bd-link-icon has-text-link">
+                    <i class="fas fa-map-pin"></i>
+                  </span>
+              </figure>
+              Simple and clear user interface
+            </h2>
+            <p class="bd-link-subtitle">Easy to use</p>
+          </a>
+          <a class="bd-link" href="#">
+            <p class="bd-link-surtitle"><span class="tag is-info">WIP</span></p>
+            <h2 class="bd-link-name">
+              <figure class="bd-link-figure">
+                  <span class="bd-link-icon has-text-link">
+                    <i class="fas fa-file-export"></i>
+                  </span>
+              </figure>
+              Export with many formats
+            </h2>
+            <p class="bd-link-subtitle">Keeping the docs in sync & backup</p>
+          </a>
+          <a class="bd-link" href="#">
+            <p class="bd-link-surtitle">19 April 2019</p>
+            <h2 class="bd-link-name">
+              <figure class="bd-link-figure">
+                  <span class="bd-link-icon has-text-link">
+                    <i class="fas fa-marker"></i>
+                  </span>
+              </figure>
+              Powerful editor with Quill
+            </h2>
+            <p class="bd-link-subtitle">Keeping the docs in sync</p>
+          </a>
+          <a class="bd-link" href="#">
+            <p class="bd-link-surtitle">19 April 2019</p>
+            <h2 class="bd-link-name">
+              <figure class="bd-link-figure">
+                  <span class="bd-link-icon has-text-link">
+                    <i class="fas fa-share"></i>
+                  </span>
+              </figure>
+              Sharing your note quickly
+            </h2>
+            <p class="bd-link-subtitle">Keeping Unique note URL</p>
+          </a>
+          <a class="bd-link" href="#">
+            <p class="bd-link-surtitle"><span class="tag is-info">19 April 2019</span></p>
+            <h2 class="bd-link-name">
+              <figure class="bd-link-figure">
+                  <span class="bd-link-icon has-text-link">
+                    <i class="fas fa-key"></i>
+                  </span>
+              </figure>
+              Password protection
+            </h2>
+            <p class="bd-link-subtitle">Set password on your note</p>
+          </a>
+          <a class="bd-link" href="#">
+            <p class="bd-link-surtitle"><span class="tag is-info">WIP</span></p>
+            <h2 class="bd-link-name">
+              <figure class="bd-link-figure">
+                  <span class="bd-link-icon has-text-link">
+                    <i class="fas fa-exchange-alt"></i>
+                  </span>
+              </figure>
+              Customize note URL
+            </h2>
+            <p class="bd-link-subtitle">Keeping to friendly and meaning</p>
+          </a>
+          <a class="bd-link" href="#">
+            <p class="bd-link-surtitle">19 April 2019</p>
+            <h2 class="bd-link-name">
+              <figure class="bd-link-figure">
+                  <span class="bd-link-icon has-text-link">
+                    <i class="fas fa-mobile-alt"></i>
+                  </span>
+              </figure>
+              Ready responsive layout
+            </h2>
+            <p class="bd-link-subtitle">on the mobile, tablet, desktop and many different resolutions</p>
+          </a>
+          <a class="bd-link" href="#">
+            <p class="bd-link-surtitle"><span class="tag is-info">WIP</span></p>
+            <h2 class="bd-link-name">
+              <figure class="bd-link-figure">
+                  <span class="bd-link-icon has-text-link">
+                    <i class="fas fa-globe-americas"></i>
+                  </span>
+              </figure>
+              Multiples language
+            </h2>
+            <p class="bd-link-subtitle">I18n</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="bd-footer-support">
+  <h4 class="bd-footer-title">
+      <strong>Issue report</strong> QNotepad
+  </h4>
+  <div class="columns">
+    <div class="column is-12">
+      <p class="bd-footer-donation-title">
+        <strong>GitHub</strong> issue
+      </p>
+      <a target="_blank" class="button is-link"  href="https://github.com/tienquanutc/simple-note/issues/new">
+        <i style="color: #333" class="fab fa-github fa-lg"></i>&nbsp; <strong>QNotepad</strong></a>
+    </div>
+  </div>
+</div>
+{% endblock %}
