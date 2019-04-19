@@ -1,0 +1,35 @@
+plugins {
+    id 'groovy'
+    id 'java'
+}
+
+group 'leanteach'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy:2.5.6'
+
+    compile 'io.vertx:vertx-web:3.6.3'
+    compile 'io.vertx:vertx-jdbc-client:3.6.3'
+    compile 'io.vertx:vertx-web-templ-pebble:3.6.3'
+    compile 'io.pebbletemplates:pebble:3.0.8'
+
+    compile 'org.xerial:sqlite-jdbc:3.19.3'
+    compile 'com.spotify:completable-futures:0.3.2'
+    compile 'org.ocpsoft.prettytime:prettytime:4.0.2.Final'
+
+    compile 'commons-io:commons-io:2.6'
+    compile 'org.apache.commons:commons-lang3:3.8.1'
+    compile 'commons-validator:commons-validator:1.6'
+
+    compile 'ch.qos.logback:logback-core:1.2.3'
+    compile 'ch.qos.logback:logback-classic:1.2.3'
+
+    testCompile 'org.spockframework:spock-core:1.2-groovy-2.5'
+}

@@ -1,0 +1,30 @@
+{% extends 'base.peb' %}
+
+{% block head %}
+<title>QNotepad Online - Write notes online</title>
+
+<meta name="description" content="Fast, clean, simple to use and FREE online web notepad. Powerful to share with everyone about your note."/>
+<meta name="keywords" content="online notepad, online note app, online notebook, online bookmark, online private note, private text message, message online, online inbox message"/>
+<link rel="canonical" href="{{ absoluteUri }}"/>
+
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="columns">
+  <div class="column is-9 has-text-centered">
+    <h1 class="title"><a class="has-text-black" href="/">QNotepad Online</a></h1>
+    <h2 class="subtitle">Free online note trusted by millions</h2>
+  </div>
+</div>
+<div class="columns">
+{% for note in notes %}
+  <div class="column is-12">
+    <a href="/notes/{{ note.slug_url }}" style="color: inherit">
+      <p class="has-text-weight-semibold hover-underline">{{ note.title | abbreviate(18) }}</p>
+      <p class="is-size-7 has-text-right">{{ note.created_at | time_ago }}</p>
+    </a>
+  </div>
+{% endfor %}
+</div>
+{% endblock content %}

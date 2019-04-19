@@ -1,0 +1,79 @@
+{% extends 'base.peb' %}
+
+{% block head %}
+<title>QNotepad Online - Write notes online</title>
+
+<meta name="description" content="Fast, clean, simple to use and FREE online web notepad. Powerful to share with everyone about your note."/>
+<meta name="keywords" content="online notepad, online note app, online notebook, online bookmark, online private note, private text message, message online, online inbox message"/>
+<link rel="canonical" href="{{ absoluteUri }}"/>
+
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="columns">
+  <div class="column is-9 has-text-centered">
+    <h1 class="title"><a class="has-text-black" href="/">QNotepad Online</a></h1>
+    <h2 class="subtitle">Free online note trusted by millions</h2>
+  </div>
+</div>
+<div class="columns">
+  <div class="column is-9">
+    <div class="box">
+    {% if message is not null %}
+      <div class="block">
+        <article class="message is-{{ message.type }}">
+          <div class="message-header">
+            <p>{{ message.title }}</p>
+            <button type="button" class="delete" aria-label="delete"></button>
+          </div>
+          <div class="message-body">
+          {{ message.body }}
+          </div>
+        </article>
+      </div>
+    {% endif %}
+    {# @formatter:off #}
+     {% if readonly == true %}
+     {% include 'components/note_readonly.peb' %}
+     {% else %}
+     {% include 'components/note_editor.peb' %}
+     {% endif %}
+    {# @formatter:on #}
+      <div class="block">
+        <div class="message is-warning">
+          <div class="message-body">
+            <p>Your note will be stored forever until we receive <a href="mailto:support@znotepad.com">DMCA report</a> to delete about the note.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h2 class="title is-size-4 is-spaced">What is Notepad online?</h2>
+        <p class="is-size-6">It's free Online note document to bookmark your information. You can
+          write notes and share them quickly with everyone. Click <a href="tienquan.utc@gmail.com">DMCA Report</a> to
+          report copyrighted content or information you want to delete on the website.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column is-3">
+    <nav class="panel">
+      <p class="panel-heading">
+        <a href="/notes/all/" style="color: inherit">Recent Notes</a>
+      </p>
+      {% for note in recentNotes %}
+        <div class="panel-block is-block">
+          <a href="/notes/{{ note.slug_url }}" style="color: inherit">
+            <p class="has-text-weight-semibold hover-underline">{{ note.title | abbreviate(18) }}</p>
+            <p class="is-size-7 has-text-right">{{ note.created_at | time_ago }}</p>
+          </a>
+        </div>
+      {% endfor %}
+      <br>
+      <a href="/notes/all/" class="button is-rounded is-outlined is-fullwidth"> More ❯</a>
+    </nav>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{% endblock %}

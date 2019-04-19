@@ -1,0 +1,64 @@
+<div class="column has-background-light">
+  <label class="label">Share URL</label>
+  <div class="field field has-addons">
+    <div class="control is-expanded has-icons-left">
+      <label>
+        <input id="share-url" readonly class="input is-link" type="text" value="{{ absoluteUri }}">
+      </label>
+      <span class="icon is-small is-left"><i class="fas fa-link"></i></span>
+    </div>
+  </div>
+</div>
+
+<div class="column">
+  <p class="buttons">
+    <a href="/notes/?base={{ note.slug_url }}" class="button is-info">
+    <span class="icon">
+      <i class="fas fa-clone"></i>
+    </span>
+      <span>Clone note</span>
+    </a>
+    <a href="https://facebook.com/sharer/sharer.php?u={{ absoluteUri | urlencode }}" class="button">
+    <span class="icon" style="color: #3b579d;">
+      <i class="fab fa-facebook"></i>
+    </span>
+      <span>Share on Facebook</span>
+    </a>
+    <a href="https://twitter.com/intent/tweet/?text=&amp;url={{ absoluteUri | urlencode  }}" class="button">
+    <span class="icon" style="color: #55acee;">
+      <i class="fab fa-twitter"></i>
+    </span>
+      <span>Share on Twitter</span>
+    </a>
+  </p>
+</div>
+
+<div class="column">
+  <p class="title is-size-4 is-spaced">{{ note.title }}</p>
+  <div class="ql-editor" style="padding: 0 !important;white-space: inherit;">
+  {{ note.raw_html | raw }}
+  </div>
+  <hr>
+  <nav class="level is-mobile">
+    <div class="level-left"></div>
+    <div class="level-right">
+      <span class="has-text-weight-bold is-size-6">13 views</span>
+    </div>
+  </nav>
+</div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/notie/4.3.1/notie.min.css" type="text/css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/notie/4.3.1/notie.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+
+<script>
+  var clipboard = new ClipboardJS('#share-url', {
+    text: function (trigger) {
+      return $(trigger).val();
+    }
+  });
+
+  clipboard.on('success', function () {
+    notie.alert({type: 'info', text: 'Copied!', position: 'bottom', time: 2}) // Hides after 2 seconds
+  });
+</script>

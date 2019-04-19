@@ -1,0 +1,126 @@
+<form id="note-form" action="/notes/" method="post" class="block">
+  <div class="field">
+    <div class="control">
+      <input id="note-title" maxlength="70" autocomplete="off" value="{{ note.title }}" name="title" class="input is-shadowless" type="text" placeholder="Note Title">
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <input id="note-private" name="private" type="checkbox"> <span>Don't show note public</span>
+    </div>
+  </div>
+
+  <div style="margin-bottom: 12px">
+    <div id="toolbar">
+          <span class="ql-formats">
+            <select class="ql-size"></select>
+          </span>
+      <span class="ql-formats">
+            <button class="ql-bold">Bold</button>
+            <button class="ql-italic">Italic</button>
+          </span>
+      <span class="ql-formats">
+            <select class="ql-color"></select>
+            <select class="ql-background"></select>
+          </span>
+      <span class="ql-formats">
+            <button class="ql-header" value="1"></button>
+            <button class="ql-header" value="2"></button>
+            <button class="ql-blockquote"></button>
+            <button class="ql-code-block"></button>
+          </span>
+      <span class="ql-formats">
+            <button class="ql-list" value="ordered"></button>
+            <button class="ql-list" value="bullet"></button>
+          </span>
+      <span class="ql-formats">
+            <select class="ql-align"></select>
+          </span>
+      <span class="ql-formats">
+            <button class="ql-link"></button>
+            <button class="ql-video"></button>
+          </span>
+      <span class="ql-formats">
+            <button class="ql-clean"></button>
+          </span>
+    </div>
+    <input value="{{ note.plain_text }}" id="note-plain-text" name="plain_text" type="hidden">
+    <input value="{{ note.raw_html | raw }}" id="note-raw-html" name="raw_html" type="hidden">
+    <div id="editor-container" style="height: 350px;font-size: 14px;"></div>
+  </div>
+  <div class="field has-text-centered">
+    <button id="saveNote" type="submit" class="button is-primary">
+      <i class="far fa-save"></i> &nbsp; Save this note
+    </button>
+  </div>
+</form>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+    {# init editor #}
+    var $editor = new Quill('#editor-container', {
+      modules: {
+        toolbar: '#toolbar'
+      },
+      theme: 'snow',
+      placeholder: 'Compose an epic...'
+    });
+
+    const LS_KEY_NOTE_TITLE = 'NOTE_TITLE';
+    const LS_KEY_NOTE_PRIVATE = 'NOTE_PRIVATE';
+    const LS_KEY_NOTE_PLAIN_TEXT = 'NOTE_PLAIN_TEXT';
+    const LS_KEY_NOTE_RAW_HTML = 'NOTE_RAW_HTML';
+
+    var $title = document.getElementById('note-title');
+    var $private = document.getElementById('note-private');
+    var $rawHtml = document.getElementById('note-raw-html');
+    var $plainText = document.getElementById('note-plain-text');
+
+    {# restore old note #}
+    {% if note is null  %}
+    $title.value = localStorage.getItem(LS_KEY_NOTE_TITLE);
+    $private.value = localStorage.getItem(LS_KEY_NOTE_PRIVATE);
+    $editor.root.innerHTML = localStorage.getItem(LS_KEY_NOTE_RAW_HTML);
+    {% else %}
+    {# load note #}
+    {# @formatter:off #}
+  $editor.root.innerHTML = "{{ note.raw_html | raw }}";
+  {% endif %}
+
+
+  {# init auto save #}
+  const _debounce = (func, delay) => {
+    let debounceTimer;
+    return function() {
+      const context = this;
+      const args = arguments;
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => func.apply(context, args), delay)
+    }
+  };
+
+  $editor.on('text-change', function () {
+    var rawHtml = $editor.root.innerHTML;
+    var plainText = $editor.getText();
+
+    $rawHtml.value = rawHtml;
+    $plainText.value = plainText;
+    localStorage.setItem(LS_KEY_NOTE_RAW_HTML, rawHtml);
+    localStorage.setItem(LS_KEY_NOTE_PLAIN_TEXT, plainText);
+  });
+
+  $title.addEventListener('change', _debounce(function () {
+    localStorage.setItem(LS_KEY_NOTE_TITLE, this.value)
+  }), 1000);
+
+  $private.addEventListener('change', _debounce(function () {
+     localStorage.setItem(LS_KEY_NOTE_PRIVATE, this.checked)
+  }, 1000));
+
+  {# clear storage on submit #}
+  document.getElementById('note-form').addEventListener('submit', function () {
+      localStorage.removeItem(LS_KEY_NOTE_TITLE);
+      localStorage.removeItem(LS_KEY_NOTE_PRIVATE);
+      localStorage.removeItem(LS_KEY_NOTE_PLAIN_TEXT);
+      localStorage.removeItem(LS_KEY_NOTE_RAW_HTML);
+  });
+</script>

@@ -1,0 +1,13 @@
+create table notes
+(
+    id         integer primary key autoincrement,
+    title      VARCHAR  not null,
+    slug   VARCHAR  not null,
+    plain_text VARCHAR not null,
+    raw_html VARCHAR not null,
+    private BOOLEAN not null default FALSE,
+    status     int      default 200 not null,
+    created_at Datetime default (datetime('now')) not null,
+    updated_at  Datetime
+);
+create unique index notes_slug_url_uindex on notes (slug_url);
