@@ -41,13 +41,13 @@ class NoteDAO extends BaseDAO {
         return this.findFirst([where: ['slug_url=?': slugUrl]])
     }
 
-    CompletableFuture<List<Map>> recentNotes(Map params) {
+    CompletableFuture<List<Map>> queryNotes(Map params) {
         Integer limit = params.limit as Integer ?: 3
         Integer skip = params.skip as Integer ?: 0
         return this.finds([select: ['title', 'slug_url', 'created_at'], where: ['private=?': 0], orderBy: [created_at: 'desc'], limit: limit, skip: skip])
     }
 
     CompletableFuture<Integer> countNotes() {
-        return this.findFirst([select: ['count(*) as count']]).thenApply { it.count }
+        return this.findFirst([select: ['count(*) as count'], where:['private = ?': 0]]).thenApply { it.count }
     }
 }

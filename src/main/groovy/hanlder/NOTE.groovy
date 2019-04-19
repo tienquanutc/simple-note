@@ -23,7 +23,7 @@ class NOTE extends VertxViewHandler<AppConfig> {
 
         String noteSlugUrl = notePathParam ? URLDecoder.decode(notePathParam, 'UTF-8') : noteBaseSlugUrl
 
-        def recentNotesFuture = this.noteDAO.recentNotes([limit: 8])
+        def recentNotesFuture = this.noteDAO.queryNotes([limit: 8])
         if (!noteSlugUrl) {
             recentNotesFuture.thenApply { recentNotes ->
                 ctx.put('recentNotes', recentNotes)
@@ -62,8 +62,11 @@ class NOTE extends VertxViewHandler<AppConfig> {
         String rawHtml = formAttributes.get('raw_html')
 
         if (!title || !plainText || !rawHtml) {
-            ctx.put('message', [type: 'error', body: 'Please enter your note content you want to save. Just do it as well.'])
-            this.renderView(ctx)
+            this.noteDAO.queryNotes([limit: 8]).thenApply { recentNotes ->
+                ctx.put('recentNotes', recentNotes)
+                ctx.put('message', [type: 'warning', title: "Message", body: 'Please enter your note content you want to save. Just do it as well.'])
+                this.renderView(ctx)
+            }.exceptionally(ctx.&fail)
             return
         }
 
@@ -82,10 +85,14 @@ class NOTE extends VertxViewHandler<AppConfig> {
 
     void handleAllNotes(RoutingContext ctx) {
         def pageSize = 12
-        def notesFuture = this.noteDAO.recentNotes([limit: 8])
-        def countNotesFuture = this.noteDAO.countNotes()
-        def currentPageIndex = ctx.request().getParam('page')
+        def currentPageIndex = ctx.request().getParam('page') as Integer ?: 1
         def pagingQuery = ctx.request().query()?.replaceAll("page=\\d+&?", '')
+        def path = ctx.request().path()
+        if (!path.endsWith('/')) path += '/'
+
+        def skip = pageSize * (currentPageIndex - 1)
+        def notesFuture = this.noteDAO.queryNotes([skip: skip, limit: pageSize])
+        def countNotesFuture = this.noteDAO.countNotes()
 
         CompletableFutures.combine(notesFuture, countNotesFuture) { notes, count ->
             def meta = [
@@ -97,9 +104,10 @@ class NOTE extends VertxViewHandler<AppConfig> {
             ctx.put('notes', notes)
             ctx.put('pagingQuery', pagingQuery)
             ctx.put('meta', meta)
+            ctx.put('path', path)
 
-            this.renderView(ctx)
-        }.exceptionally{e -> e.printStackTrace(); ctx.fail(e);}
+            this.renderView(ctx, '/all_notes.peb')
+        }.exceptionally { e -> e.printStackTrace(); ctx.fail(e); }
     }
 
 }

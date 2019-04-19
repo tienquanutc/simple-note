@@ -21,8 +21,8 @@ class BaseDAO {
         List<String> select = request.select as List<String> ?: ['*']
         Map where = request.where as Map ?: [:]
         Map orderBy = request.orderBy as Map ?: [:]
-        Integer skip = request.skip as Integer
-        Integer limit = request.limit as Integer
+        Integer skip = request.skip as Integer ?: 0
+        Integer limit = request.limit as Integer ?: -1
 
         def sqlBuilder = new StringBuilder()
         def params = []
@@ -38,13 +38,7 @@ class BaseDAO {
             sqlBuilder << ' ORDER BY ' << orderBy.collect { key, value -> " $key $value " }.join(', ')
         }
 
-        if (skip) {
-            sqlBuilder << ' SKIP ' << skip
-        }
-
-        if (limit) {
-            sqlBuilder << ' LIMIT ' << limit
-        }
+        sqlBuilder << ' LIMIT ' << skip << ', ' << limit
 
         String sql = sqlBuilder.toString()
         if (log.isDebugEnabled()) {

@@ -38,9 +38,9 @@
     <li><span class="pagination-ellipsis">&hellip;</span></li>
 
   {#  total pages#}
-  {#  {% if meta.expected_totalPages is null %}#}
-  {#        {{ p_item(_context, meta.totalPages) }}#}
-  {#  {% endif %}#}
+    {% if meta.expected_totalPages is null %}
+          {{ p_item(_context, meta.totalPages) }}
+    {% endif %}
   {#in middle; hide some front and some back#}
   {%elseif meta.has_more_page == true or (meta.totalPages - (adjacents * 2) > meta.currentPageIndex) and (meta.currentPageIndex > (adjacents * 2))%}
   {{ p_item(_context, 1) }}
@@ -50,9 +50,9 @@
     {% endfor %}
     <li><span class="pagination-ellipsis">&hellip;</span></li>
   {#  total pages#}
-  {#  {% if meta.expected_totalPages is null %}#}
-  {#        {{ p_item(_context, meta.totalPages) }}#}
-  {#  {% endif %}#}
+  {% if meta.expected_totalPages is null %}
+          {{ p_item(_context, meta.totalPages) }}
+    {% endif %}
   {#close to end; only hide early pages#}
   {%else%}
   {{ p_item(_context, 1) }}

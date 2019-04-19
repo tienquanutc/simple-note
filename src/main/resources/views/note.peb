@@ -57,22 +57,22 @@
     </div>
   </div>
 
-  <div class="column is-3">
-    <nav class="panel">
-      <p class="panel-heading">
-        <a href="/notes/all/" style="color: inherit">Recent Notes</a>
-      </p>
-      {% for note in recentNotes %}
-        <div class="panel-block is-block">
-          <a href="/notes/{{ note.slug_url }}" style="color: inherit">
-            <p class="has-text-weight-semibold hover-underline">{{ note.title | abbreviate(18) }}</p>
-            <p class="is-size-7 has-text-right">{{ note.created_at | time_ago }}</p>
-          </a>
-        </div>
-      {% endfor %}
-      <br>
-      <a href="/notes/all/" class="button is-rounded is-outlined is-fullwidth"> More ❯</a>
-    </nav>
+  <div class="column is-3"><nav class="panel">
+    <p class="panel-heading">
+      <a href="/notes/all/" style="color: inherit">Recent Notes</a>
+    </p>
+    {% for note in recentNotes %}
+      <div class="panel-block is-block">
+        <a href="/notes/{{ note.slug_url }}" style="color: inherit">
+          <p class="has-text-weight-semibold hover-underline">{{ note.title | abbreviate(18) }}</p>
+          <p class="is-size-7 has-text-right">{{ note.created_at | time_ago }}</p>
+        </a>
+      </div>
+    {% endfor %}
+    <br>
+    <a href="/notes/all/" class="button is-rounded is-outlined is-fullwidth"> More ❯</a>
+  </nav>
+
   </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
