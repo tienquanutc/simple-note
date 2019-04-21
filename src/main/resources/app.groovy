@@ -6,7 +6,7 @@ environments {
         }
     }
     dev {
-        httpPort = 5001
+        httpPort = 5000
         db {
             sqlite = 'jdbc:sqlite:db/dev.master.db'
         }

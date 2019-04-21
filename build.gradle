@@ -1,6 +1,7 @@
 plugins {
     id 'groovy'
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '4.0.1'
 }
 
 group 'leanteach'
@@ -33,3 +34,16 @@ dependencies {
 
     testCompile 'org.spockframework:spock-core:1.2-groovy-2.5'
 }
+
+
+def mainClassName = "app.Main"
+
+shadowJar {
+    classifier = "fat"
+    destinationDir = new File("dokku")
+    archiveName = "notepad-site.${extension}"
+    manifest {
+        attributes "Main-Class": mainClassName
+    }
+}
+
