@@ -12,19 +12,19 @@
 
 <div class="column">
   <p class="buttons">
-    <a href="/notes/?base={{ note.slug_url }}" class="button is-info">
+    <a href="/notes/?base={{ note.slug_url }}" class="button is-info is-fullwidth-mobile">
     <span class="icon">
       <i class="fas fa-clone"></i>
     </span>
       <span>Clone note</span>
     </a>
-    <a href="https://facebook.com/sharer/sharer.php?u={{ absoluteUri | urlencode }}" class="button">
+    <a href="https://facebook.com/sharer/sharer.php?u={{ absoluteUri | urlencode }}" class="button is-fullwidth-mobile">
     <span class="icon" style="color: #3b579d;">
       <i class="fab fa-facebook"></i>
     </span>
       <span>Share on Facebook</span>
     </a>
-    <a href="https://twitter.com/intent/tweet/?text=&amp;url={{ absoluteUri | urlencode  }}" class="button">
+    <a href="https://twitter.com/intent/tweet/?text=&amp;url={{ absoluteUri | urlencode  }}" class="button is-fullwidth-mobile">
     <span class="icon" style="color: #55acee;">
       <i class="fab fa-twitter"></i>
     </span>

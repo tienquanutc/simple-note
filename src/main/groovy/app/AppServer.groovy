@@ -4,6 +4,7 @@ import hanlder.FEATURE
 
 import hanlder.NOTE
 import io.vertx.ext.web.handler.BodyHandler
+import io.vertx.ext.web.handler.CSRFHandler
 import io.vertx.ext.web.handler.CookieHandler
 import io.vertx.ext.web.handler.SessionHandler
 import io.vertx.ext.web.handler.StaticHandler
@@ -22,6 +23,7 @@ class AppServer extends VertxServer<AppConfig> {
         router.route().handler(BodyHandler.create())
         router.route().handler(CookieHandler.create())
         router.route().handler(SessionHandler.create(SessionStore.create(vertx)))
+        router.route().handler(CSRFHandler.create("csrf"))
 
         StaticHandler.create(config.webRootDirectory).with {
             router.getWithRegex("/favicon.ico").handler(delegate)
@@ -48,7 +50,5 @@ class AppServer extends VertxServer<AppConfig> {
             router.get("/features").handler(delegate)
             router.get("/features/").handler(delegate)
         }
-
-
     }
 }

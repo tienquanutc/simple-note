@@ -14,12 +14,12 @@
     <li>
     {% if meta.currentPageIndex > 1 %}
     {% if meta.currentPageIndex != 2 %}
-      <a href="{{ path }}?page={{ meta.currentPageIndex - 1 }}{% if pagingQuery %}&{{ pagingQuery }}{% endif %}" class="pagination-link" rel="prev">❮</a>
+      <a href="{{ path }}?page={{ meta.currentPageIndex - 1 }}{% if pagingQuery %}&{{ pagingQuery }}{% endif %}" class="pagination-link" rel="prev">	&#x276E;</a>
     {% else %}
-      <a href="{{ path }}{% if pagingQuery %}?{{ pagingQuery }}{% endif %}" class="pagination-link" rel="prev">❮</a>
+      <a href="{{ path }}{% if pagingQuery %}?{{ pagingQuery }}{% endif %}" class="pagination-link" rel="prev">	&#x276E;</a>
     {% endif %}
     {% else %}
-      <a class="pagination-link" disabled>❮</a>
+      <a class="pagination-link" disabled>	&#x276E;</a>
     {%endif%}
     </li>
 
@@ -66,9 +66,9 @@
   {#next#}
     <li>
     {% if meta.has_more_page == true or meta.currentPageIndex < meta.totalPages %}
-      <a href="{{ path }}?page={{ meta.currentPageIndex + 1 }}{% if pagingQuery %}&{{ pagingQuery }}{% endif %}" class="pagination-link" rel="next">❯</a>
+      <a href="{{ path }}?page={{ meta.currentPageIndex + 1 }}{% if pagingQuery %}&{{ pagingQuery }}{% endif %}" class="pagination-link" rel="next">&#x276F;</a>
     {% else %}
-      <a class="pagination-link" disabled>❯</a>
+      <a class="pagination-link" disabled>&#x276F;</a>
     {%endif%}
     </li>
   </ul>

@@ -5,7 +5,7 @@
 <meta name="description" content="Fast, clean, simple to use and FREE online web notepad. Powerful to share with everyone about your note."/>
 <meta name="keywords" content="online notepad, online note app, online notebook, online bookmark, online private note, private text message, message online, online inbox message"/>
 <link rel="canonical" href="{{ absoluteUri }}"/>
-<link rel="stylesheet" href="css/bulma.feature.css">
+<link rel="stylesheet" href="/css/bulma.feature.css">
 {% endblock %}
 
 
@@ -88,7 +88,7 @@
             <p class="bd-link-subtitle">Keeping Unique note URL</p>
           </a>
           <a class="bd-link" href="#">
-            <p class="bd-link-surtitle"><span class="tag is-info">19 April 2019</span></p>
+            <p class="bd-link-surtitle"><span class="tag is-info">WIP</span></p>
             <h2 class="bd-link-name">
               <figure class="bd-link-figure">
                   <span class="bd-link-icon has-text-link">

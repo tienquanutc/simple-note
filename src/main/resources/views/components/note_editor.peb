@@ -46,6 +46,7 @@
     </div>
     <input value='{{ note.plain_text }}' id="note-plain-text" name="plain_text" type="hidden">
     <input value='{{ note.raw_html | raw }}' id="note-raw-html" name="raw_html" type="hidden">
+    <input type="hidden" name="X-XSRF-TOKEN" value="{{ _context['X-XSRF-TOKEN'] }}">
     <div id="editor-container" style="height: 350px;font-size: 14px;"></div>
   </div>
   <div class="field has-text-centered">

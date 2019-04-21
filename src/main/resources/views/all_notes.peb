@@ -12,7 +12,7 @@
 
 {% block content %}
 <div class="columns">
-  <div class="column is-9 has-text-centered">
+  <div class="column is-12 has-text-centered">
     <h1 class="title"><a class="has-text-black" href="/">QNotepad Online</a></h1>
     <h2 class="subtitle">Free online note trusted by millions</h2>
   </div>
@@ -24,7 +24,9 @@
   {% for note in notes %}
     <div class="panel-block is-block">
       <a href="/notes/{{ note.slug_url }}" style="color: inherit">
-        <p class="has-text-weight-semibold hover-underline">{{ note.title | abbreviate(18) }}</p>
+        <p class="has-text-weight-semibold hover-underline" style="line-height: 1.15;font-size: 1rem;overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 1;display: -webkit-box;-webkit-box-orient: vertical">
+        {{ note.title }}
+        </p>
         <p class="is-size-7 has-text-right">{{ note.created_at | time_ago }}</p>
       </a>
     </div>

@@ -3,6 +3,8 @@ package dao
 import io.vertx.core.Vertx
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.IOUtils
+import org.apache.commons.lang3.RandomUtils
+import org.apache.commons.lang3.time.DateUtils
 import spock.lang.Shared
 import spock.lang.Specification
 import sqllite.SqlLiteClient
@@ -22,9 +24,9 @@ class NoteDAOSpec extends Specification {
         def sqlLiteClient = new SqlLiteClient(vertx, "jdbc:sqlite:${this.dbFile.path}")
         this.noteDAO = new NoteDAO(sqlLiteClient)
 
-        FileUtils.deleteQuietly()
-        def script = IOUtils.toString(this.class.getResourceAsStream('/script.txt'), 'UTF-8')
-        this.noteDAO.sqliteClient.execute(script).get()
+//        FileUtils.deleteQuietly()
+//        def script = IOUtils.toString(this.class.getResourceAsStream('/script.txt'), 'UTF-8')
+//        this.noteDAO.sqliteClient.execute(script).get()
     }
 
     def cleanupSpec() {
@@ -39,7 +41,6 @@ class NoteDAOSpec extends Specification {
         def result = this.noteDAO.insert(request).get()
 
         then:
-        assert result.updated == 1
         assert result.keys
 
         def id = result.keys.getInteger(0)
@@ -87,6 +88,7 @@ class NoteDAOSpec extends Specification {
     def 'find notes spec'() {
         given:
         def request = [select: ['*'], where: ['id = ?': 1]]
+
         when:
         def notes = this.noteDAO.finds(request).get()
 
@@ -95,6 +97,59 @@ class NoteDAOSpec extends Specification {
 
         1 == 1
 
+    }
+
+    def 'insert dummy notes'() {
+        given:
+        def titles = ['Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                      , 'Donec suscipit nulla bibendum, hendrerit metus id, rutrum urna.'
+                      , 'Cras luctus est quis tortor dignissim laoreet.'
+                      , 'Donec sed dui mollis tortor suscipit commodo eget a augue.'
+                      , 'Suspendisse at mi ac velit varius placerat.'
+                      , 'Suspendisse viverra felis eu mi sollicitudin euismod.'
+                      , 'In at libero a nisi placerat cursus sed vitae tortor.'
+                      , 'Duis a est imperdiet, ullamcorper est sit amet, hendrerit tellus.'
+                      , 'Aenean bibendum diam nec turpis ultricies, quis placerat eros rhoncus.'
+                      , 'Curabitur euismod massa in nisi vulputate, id ultricies nibh laoreet.'
+                      , 'Praesent sit amet leo sit amet mi faucibus luctus a in augue.'
+                      , 'Praesent euismod nisl sodales mattis sollicitudin.'
+                      , 'Donec euismod tortor ut leo commodo, vitae eleifend libero iaculis.'
+                      , 'Mauris id nisl tincidunt nibh rhoncus faucibus vel at enim.'
+                      , 'Fusce tincidunt mi vitae augue scelerisque, euismod vulputate diam ultrices.'
+                      , 'Ut sit amet erat facilisis nulla efficitur vulputate sit amet at metus.'
+                      , 'Pellentesque eu nisl sit amet odio semper ultricies in vitae erat.'
+                      , 'Proin ut ante id ante lacinia vehicula id non diam.'
+                      , 'Vestibulum vitae enim eu sem finibus tincidunt.'
+                      , 'Mauris dictum erat ut risus eleifend, nec lobortis nulla dignissim.'
+                      , 'Donec fringilla orci non venenatis volutpat.'
+                      , 'Sed porttitor ante vulputate interdum tincidunt.'
+                      , 'Nam hendrerit ipsum vel diam posuere pretium.'
+                      , 'Vestibulum tempor justo rutrum ante congue posuere.'
+                      , 'Quisque placerat nunc eu magna fringilla, commodo condimentum justo dignissim.'
+                      , 'Suspendisse gravida leo et efficitur ultricies.'
+                      , 'Fusce luctus metus sed tellus tincidunt, et pharetra tellus maximus', 'Mauris id nisl tincidunt nibh rhoncus faucibus vel at enim.'
+                      , 'Fusce tincidunt mi vitae augue scelerisque, euismod vulputate diam ultrices.'
+                      , 'Ut sit amet erat facilisis nulla efficitur vulputate sit amet at metus.'
+                      , 'Pellentesque eu nisl sit amet odio semper ultricies in vitae erat.'
+                      , 'Proin ut ante id ante lacinia vehicula id non diam.'
+                      , 'Vestibulum vitae enim eu sem finibus tincidunt.'
+                      , 'Mauris dictum erat ut risus eleifend, nec lobortis nulla dignissim.'
+                      , 'Donec fringilla orci non venenatis volutpat.'
+                      , 'Sed porttitor ante vulputate interdum tincidunt.'
+                      , 'Nam hendrerit ipsum vel diam posuere pretium.'
+                      , 'Vestibulum tempor justo rutrum ante congue posuere.'
+                      , 'Quisque placerat nunc eu magna fringilla, commodo condimentum justo dignissim.'
+                      , 'Suspendisse gravida leo et efficitur ultricies.'
+                      , 'Fusce luctus metus sed tellus tincidunt, et pharetra tellus maximus']
+
+        def now = new Date()
+        when:
+        titles.each {
+            def randomDate = DateUtils.addMinutes(now, RandomUtils.nextInt(0, 60) - 60) //-60->0
+            this.noteDAO.insert([title: it, plain_text: it, private: 0, raw_html: it, created_at: randomDate]).get()
+        }
+        then:
+        1 == 1
     }
 
 }
